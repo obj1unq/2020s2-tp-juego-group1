@@ -14,4 +14,5 @@ Tendremos dos tipos de enemigos: los de nivel bajo y los de nivel alto. Los prim
 En cada escenario tendremos la ayuda de dos personajes fijos, es decir, no se moverá sino que nosotros debemos acercarnos. A cada uno le podremos comprar diferentes ítems.
 
 MaríaElena: Este personaje es el que nos ofrecerá las armas para destruir a los enemigos. El arsenal de armas podrá variar dependiendo del escenario. Tendremos para elegir una pistola laser, una escopeta con veneno o un lanzafuego. Cada una causará diferente nivel de daño y tendrá diferente valor.
-MoniArgento: Esta personaje nos ofrecerá comida para recuperar los corazones. Podremos elegir entre una porsión de pizza, un sanguchito, una milanesa o un cafecito. Cada ítem tendrá diferente precio y aportará mayor o menor energía.
+
+MoniArgento: Este personaje nos ofrecerá comida para recuperar los corazones. Podremos elegir entre una porción de pizza, un sanguchito, una milanesa o un cafecito. Cada ítem tendrá diferente precio y aportará mayor o menor energía.
