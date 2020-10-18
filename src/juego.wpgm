@@ -1,8 +1,15 @@
 import wollok.game.*
-import pepita.*
+import personaje.*
+import nivel.*
+import mirta.*
 
 program game {
-	game.title("Juego Base")
-	game.addVisual(pepita)
+	game.height(13)
+	game.width(13)
+	nivel1.iniciar()
+	macri.disparar()
+	macri.moverAleatorio()
 	game.start()
+	
+	game.showAttributes(persona)
 }
