@@ -12,10 +12,10 @@ object macri {
 		
 	}
 	method aleatorio(posicion){
-		return [game.at(posicion.x() - 1 , posicion.y()) ,
-				game.at(posicion.x() + 1 , posicion.y()) ,
-				game.at(posicion.x() , posicion.y() - 1) ,
-				game.at(posicion.x() , posicion.y() + 1)].anyOne()
+		return [posicion.up(1) ,
+				posicion.left(1) ,
+				posicion.down(1) ,
+				posicion.right(1)].anyOne()
 	}
 	method moverSiEstoyEnZona(){
 		const lugarAMoverse = self.aleatorio(self.position())
@@ -69,7 +69,7 @@ class Disparo {
 	var property position = null
 	
 	method image(){
-		return "muro.png"
+		return "Spinning-Coin.gif"
 	}
 	method posicion(posicion){
 		position = posicion
