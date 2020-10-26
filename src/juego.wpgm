@@ -1,21 +1,15 @@
 import wollok.game.*
-import personaje.*
+import pepe.*
 import nivel.*
-import mirta.*
-import bichos.*
-
 
 program game {
-	const bicho1 = new Bichos (position = game.at(3,3))
-	bicho1.configurarZonaMovimiento(2,6,2,6)
-	game.height(13)
-	game.width(13)
-	nivel1.iniciar()
-	game.addVisual(bicho1)
-	bicho1.movimientoAleatorio()
-	macri.disparar()
-	macri.moverAleatorio()
-	game.start()
+	game.title("Pepe vs Mirtha")
+	game.height(15)
+	game.width(10)
+	game.boardGround("fondo1.jpg")
 	
-	game.showAttributes(persona)
+	
+	nivel1.iniciar()
+	
+	game.start()
 }
