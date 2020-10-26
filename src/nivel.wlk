@@ -20,7 +20,6 @@ object nivel1 {
 	}
 }
 
-
 object config {
 	
 	method configurarTeclas() {
