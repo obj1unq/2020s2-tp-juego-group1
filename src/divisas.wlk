@@ -17,6 +17,8 @@ class Moneda {
 	
 }
 
+
+
 class Billete {
 	const property valor = 300
 	var property position = game.at(1,5)

@@ -3,21 +3,80 @@ import extras.*
 import nivel.*
 import divisas.*
 
+object izquierda {
+	
+	method nombre() {
+		return "izq"
+	}
+	method mover(posicion) {
+		return posicion.left(1)
+	}
+}
+
+object derecha {
+	
+	method nombre() {
+		return "der"
+	}
+	
+	method mover(posicion) {
+		return posicion.right(1)
+	}
+}
+
+object arriba {
+	
+	method nombre() {
+		return "atras"
+	}
+	
+	method mover(posicion) {
+		return posicion.up(1)
+	}
+}
+
+object abajo {
+	
+	method nombre() {
+		return "adelante"
+	}
+	
+	method mover(posicion) {
+		return posicion.down(1)
+	}
+}
+
 object pepe {
 	var property energia = 5
 	var property position = game.origin()
 	var property cuenta = cuentaCorriente
-
+	var property image = "pepe_adelante.png"
+	var property direccion = arriba
+	
 	method image() {
-		return "pepe_atras.png"
+		return "pepe_" + direccion.nombre() + ".png"
 	}
+	
 
 	method irASiEstaEnElMapa(nuevaPosicion) {
 		if(self.estaDentroDelMapa(nuevaPosicion)) {
-			self.position().distance(nuevaPosicion)
+			position = nuevaPosicion
 		}
 	}
 	
+//	method irALaDerecha() {
+//		image = "pepe_der.png"
+//		
+//		self.irASiEstaEnElMapa(position.right(1))
+//	}
+	
+	method irA(_direccion) {
+		
+		direccion = _direccion
+		self.irASiEstaEnElMapa(direccion.mover(position))
+		
+	}
+		
 	method estaDentroDelMapa(nuevaPosicion) {
 		return 	nuevaPosicion.x().between(0, game.width() - 1)
 		and		nuevaPosicion.y().between(0, game.height() - 1) 
@@ -35,6 +94,7 @@ object pepe {
 		}
 		
 	}
+	
 			
 	method elegirYPagar(comida) {
 		const cafecito = 50
@@ -113,7 +173,7 @@ class Invisible {
 	var property position = game.origin()
 	
 	method image() {
-		return ""
+		return "muro.png"
 	}
 }
 
