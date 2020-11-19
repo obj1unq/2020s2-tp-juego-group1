@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><projectDescription>
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
 	<name>2020s2-tp-juego-group1</name>
-	<comment/>
+	<comment></comment>
 	<projects>
 	</projects>
 	<buildSpec>
@@ -31,4 +32,11 @@
 		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
 		<nature>org.uqbar.project.wollok.wollokNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>assets/escenarioobelisco.jpg</name>
+			<type>1</type>
+			<location>D:/Jorge/unq/obj/2020s2-tp-juego-group1-master/2020s2-tp-juego-group1-master/assets/escenarioobelisco.jpg</location>
+		</link>
+	</linkedResources>
 </projectDescription>

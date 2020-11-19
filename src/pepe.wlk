@@ -2,45 +2,31 @@ import wollok.game.*
 import extras.*
 import nivel.*
 import divisas.*
+import comidas.*
 
 object izquierda {
-	
-	method nombre() {
-		return "izq"
-	}
+	method nombre() {return "izq"}
 	method mover(posicion) {
 		return posicion.left(1)
 	}
 }
 
 object derecha {
-	
-	method nombre() {
-		return "der"
-	}
-	
+	method nombre() {return "der"}
 	method mover(posicion) {
 		return posicion.right(1)
 	}
 }
 
 object arriba {
-	
-	method nombre() {
-		return "atras"
-	}
-	
+	method nombre() {return "atras"}
 	method mover(posicion) {
 		return posicion.up(1)
 	}
 }
 
 object abajo {
-	
-	method nombre() {
-		return "adelante"
-	}
-	
+	method nombre() {return "adelante"}
 	method mover(posicion) {
 		return posicion.down(1)
 	}
@@ -52,29 +38,35 @@ object pepe {
 	var property cuenta = cuentaCorriente
 	var property image = "pepe_adelante.png"
 	var property direccion = arriba
+	var property tieneArma = false
+	var property estaHerido = false
+	var armaEquipada 
+	
 	
 	method image() {
-		return "pepe_" + direccion.nombre() + ".png"
+		if (tieneArma and estaHerido){return "pepe_" + direccion.nombre() + "_"+armaEquipada.nombre()+"_herido.png"
+		} else if (tieneArma) {return "pepe_" + direccion.nombre() + "_"+armaEquipada.nombre()+".png"
+		} else if (estaHerido) {return "pepe_" + direccion.nombre() + "_herido.png"
+		} else {return "pepe_" + direccion.nombre() + ".png"}
+	}
+	method equiparArma(arma){
+		armaEquipada = arma
+		tieneArma = true
+	}
+	method consumir(comida){
+		energia += comida.potencia()
 	}
 	
-
 	method irASiEstaEnElMapa(nuevaPosicion) {
 		if(self.estaDentroDelMapa(nuevaPosicion)) {
 			position = nuevaPosicion
 		}
 	}
 	
-//	method irALaDerecha() {
-//		image = "pepe_der.png"
-//		
-//		self.irASiEstaEnElMapa(position.right(1))
-//	}
-	
+
 	method irA(_direccion) {
-		
 		direccion = _direccion
 		self.irASiEstaEnElMapa(direccion.mover(position))
-		
 	}
 		
 	method estaDentroDelMapa(nuevaPosicion) {
@@ -82,21 +74,47 @@ object pepe {
 		and		nuevaPosicion.y().between(0, game.height() - 1) 
 	}
 	
+	method heridoPor(proyectil){
+		estaHerido = true
+		energia -= 1
+		game.removeVisual(proyectil)
+	}
 	method agarrarDinero(divisa) {
 		cuenta.depositar(divisa)
 		generadorDeDivisas.remover(divisa)
 	}
 	
-	method comprarAMoni(comida) {
-		
-		if (self.estoyConMoni()) {
-			self.elegirYPagar(comida)
+	method comprar(algo, alguien) {
+		if (self.estoyCon(alguien)) {
+			self.elegirYPagar(algo, alguien)
+			algo.usarEn(self)
 		}
-		
 	}
-	
 			
-	method elegirYPagar(comida) {
+	method elegirYPagar(algo, alguien){
+		self.validarDineroEnCuenta(algo)
+		game.say(self, "Quiero "+algo.nombre()+", "+alguien.nombre())
+		cuenta.extraer(algo.valor())
+		algo.usarEn(self)
+	}
+	method validarDineroEnCuenta(algo) {
+		if  (algo.valor() > cuentaCorriente.saldo()) {
+			self.error("No me alcanza la guitaaa!!")
+		}
+	}
+
+	method estoyCon(alguien) {
+		return self.position() == alguien.position()
+	}
+
+//	method irALaDerecha() {
+//		image = "pepe_der.png"
+//		
+//		self.irASiEstaEnElMapa(position.right(1))
+//	}
+	
+	
+/*	method elegirYPagar(comida) {
 		const cafecito = 50
 		const milanesa = 100
 		const pizza = 250
@@ -119,33 +137,9 @@ object pepe {
 		else { } 
 		cuenta.extraer(comida)		
 	}
-
-	method validarDineroEnCuenta(comida) {
-		const cafecito = 50
-		const milanesa = 100
-		const pizza = 250
-		const sanguchito = 300
-		
-		if  (comida > cuentaCorriente.saldo()) {
-			self.error("No me alcanza la guitaaa!!")
-		}
-	}
-
-	method estoyConMoni() {
-		return self.position() == moni.position()
-	}
+*/
 	
-	method comprarAMariaElena(armas) {
-		
-		if (self.estoyConMElena()) {
-			self.elegirArmasYPagar(armas)
-		}	
-	}
-	
-	method estoyConMElena() {
-		return self.position() == mariaElena.position()
-	}
-	
+/*
 	method elegirArmasYPagar(armas) {
 		const pistolaLaser = 700
 		const escopetaConVeneno = 500
@@ -165,40 +159,45 @@ object pepe {
 		else { } 
 		cuenta.extraer(armas)
 	}
-	
-	
-}
+*/
 
-class Invisible {
-	var property position = game.origin()
+}
+/* class Invisible {
+	const variantex 
+	const variantey
+	const invisibleDe 
 	
+	method position() {
+		return game.at(invisibleDe.position().x()+ variantex ,invisibleDe.position().y()+ variantey)
+	}
+	method nombre(){ invisibleDe.nombre()}
+	
+	method teEnvistio(argento){
+		invisibleDe.vender()
+	}
 	method image() {
 		return "muro.png"
 	}
+}*/
+	
+class Ayuda {
+	const property nombre
+	const property position
+	
+	method image()
+	method teEnvistio(argento)
 }
-
-object moni {
-	var property position = game.at(1,5)
-	
-	method image() { 
-		return "moni.png"	
+class Moni inherits Ayuda{
+	var property comidaDisponible = []
+	override method image(){return "moni.png"}
+	override method teEnvistio(argento){
+		game.say(self, "Hola Pepe, tengo")
 	}
-		
-	method teEnvistio(argento) {
-		game.say(self, "Hola Pepe... cafecitoooo") 
-	}
-		
 }
-
-object mariaElena {
-	var property position = game.at(8,8)
-	
-	method image() { 
-		return "maria_elena.png"	
+class MariaElena inherits Ayuda{
+	var property armasDisponibles = []
+	override method image(){return "maria_elena.png"}
+	override method teEnvistio(argento){
+		game.say(self, "Qué pasa bigote? ... sos careta?")
 	}
-		
-	method teEnvistio(argento) {
-		game.say(self, "qué pasa bigote!.. ¿sos careta?") 
-	}
-	
 }

@@ -4,9 +4,9 @@ import nivel.*
 
 program game {
 	game.title("Pepe vs Mirtha")
-	game.height(15)
-	game.width(20)
-	game.boardGround("fondo1.jpg")
+	game.height(14)
+	game.width(19)
+	game.boardGround("escenarioobelisco.jpg")
 	
 	
 	nivel1.iniciar()
