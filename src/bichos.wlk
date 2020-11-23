@@ -14,27 +14,26 @@ class Bichos {
 		zonaMovimiento.add(y1)
 		zonaMovimiento.add(y2)
 	}
-	method movimientoAleatorio(){
-		game.onTick(500, "movimientoAleatorio", {self.aleatorio()})
-	}
-	method aleatorio(){
+	method moverAleatorio(){
 		
-		var posicion = [position.up(1) ,
-				position.left(1) ,
-				position.down(1) ,
-				position.right(1)].anyOne()
-				
-		self.cambiarPosicionSiDebo(posicion, zonaMovimiento)
+		game.onTick(500, "moverse " , {self.moverSiEstoyEnZona()})
+		
 	}
-	
+	method aleatorio(posicion){
+		return [posicion.up(1) ,
+				posicion.left(1) ,
+				posicion.down(1) ,
+				posicion.right(1)].anyOne()
+	}
+	method moverSiEstoyEnZona(){
+		const lugarAMoverse = self.aleatorio(self.position())
+		if(self.estoyEnZona(lugarAMoverse , zonaMovimiento)) {position = lugarAMoverse} 
+	}
 	method cambiarPosicionSiDebo(posicionAIr , zona){
 		
-		if (self.estoyEnZona(position, zona)) self.cambiar(posicionAIr)
+		if (self.estoyEnZona(position, zona)) {position = posicionAIr}
 	}
-	method cambiar(posicion){
-		
-		game.schedule(60, {position = posicion})
-	}
+	
 	method estoyEnZona(lugarAMoverse, lista){
 		return lugarAMoverse.x().between(lista.first(), lista.get(1)) and lugarAMoverse.y().between(lista.get(2), lista.get(3))
 	}

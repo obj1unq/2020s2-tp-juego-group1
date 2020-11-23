@@ -3,12 +3,12 @@ import wollok.game.*
 object persona {
 	
 	var property position = game.origin()
-	var property image = "pepe2.png"
+	var property image = "pepe_adelante.png"
 	
 	
 	method cambiarImagenPorUnosSegundos() {
-		image = "pepita.png"
-		game.schedule(400, {image = "pepe2.png"})
+		image = "pepe_der_herido.png"
+		game.schedule(400, {image = "pepe_adelante.png"})
 	}
 	
 }
