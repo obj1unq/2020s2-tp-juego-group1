@@ -1,0 +1,15 @@
+import wollok.game.*
+import pepe.*
+import nivel.*
+
+program game {
+	game.title("Pepe vs Mirtha")
+	game.height(14)
+	game.width(19)
+	game.boardGround("escenarioobelisco.jpg")
+	
+	
+	nivel1.iniciar()
+	
+	game.start()
+}
