@@ -3,6 +3,7 @@ import extras.*
 import nivel.*
 import divisas.*
 import comidas.*
+import items.*
 
 object izquierda {
 	method nombre() {return "izq"}
@@ -39,16 +40,14 @@ object pepe {
 	var property image = "pepe_adelante.png"
 	var property direccion = arriba
 	var property tieneArma = false
-	var property estaHerido = false
 	var armaEquipada 
 	
 	
 	method image() {
-		if (tieneArma and estaHerido){return "pepe_" + direccion.nombre() + "_"+armaEquipada.nombre()+"_herido.png"
-		} else if (tieneArma) {return "pepe_" + direccion.nombre() + "_"+armaEquipada.nombre()+".png"
-		} else if (estaHerido) {return "pepe_" + direccion.nombre() + "_herido.png"
+		if (tieneArma){return "pepe_" + direccion.nombre() + "_"+armaEquipada.nombre()+".png"
 		} else {return "pepe_" + direccion.nombre() + ".png"}
 	}
+	
 	method equiparArma(arma){
 		armaEquipada = arma
 		tieneArma = true
@@ -58,24 +57,27 @@ object pepe {
 	}
 	
 	method irASiEstaEnElMapa(nuevaPosicion) {
-		if(self.estaDentroDelMapa(nuevaPosicion)) {
-			position = nuevaPosicion
+		if(game.getObjectsIn(nuevaPosicion).all({objeto => objeto.esAtravesable()}) and self.estaDentroDelMapa(nuevaPosicion)){
+			position = direccion.mover(position)
 		}
+		//if(self.estaDentroDelMapa(nuevaPosicion)) {
+		//	position = nuevaPosicion
+		//}
 	}
 	
 
 	method irA(_direccion) {
 		direccion = _direccion
+		
 		self.irASiEstaEnElMapa(direccion.mover(position))
 	}
 		
 	method estaDentroDelMapa(nuevaPosicion) {
 		return 	nuevaPosicion.x().between(0, game.width() - 1)
-		and		nuevaPosicion.y().between(0, game.height() - 1) 
+		and		nuevaPosicion.y().between(0, game.height() - 2) 
 	}
 	
 	method heridoPor(proyectil){
-		estaHerido = true
 		energia -= 1
 		game.removeVisual(proyectil)
 	}
@@ -85,7 +87,7 @@ object pepe {
 	}
 	
 	method comprar(algo, alguien) {
-		if (self.estoyCon(alguien)) {
+		if (self.estaAlLadoDe(alguien)) {
 			self.elegirYPagar(algo, alguien)
 			algo.usarEn(self)
 		}
@@ -95,7 +97,6 @@ object pepe {
 		self.validarDineroEnCuenta(algo)
 		game.say(self, "Quiero "+algo.nombre()+", "+alguien.nombre())
 		cuenta.extraer(algo.valor())
-		algo.usarEn(self)
 	}
 	method validarDineroEnCuenta(algo) {
 		if  (algo.valor() > cuentaCorriente.saldo()) {
@@ -103,8 +104,23 @@ object pepe {
 		}
 	}
 
-	method estoyCon(alguien) {
-		return self.position() == alguien.position()
+	method estaAlLadoDe(alguien) {
+		return self.aLaDerechaDe(alguien)
+				or self.abajoDe(alguien)
+				or self.aLaIzquierdaDe(alguien)
+				or self.arribaDe(alguien)
+	}
+	method aLaDerechaDe(alguien){
+		return self.position().left(1) == alguien.position()
+	}
+	method abajoDe(alguien){
+		return self.position().up(1) == alguien.position()
+	}
+	method aLaIzquierdaDe(alguien){
+		return self.position().right(1) == alguien.position()
+	}
+	method arribaDe(alguien){
+		return self.position().down(1) == alguien.position()
 	}
 
 //	method irALaDerecha() {
@@ -181,23 +197,49 @@ object pepe {
 }*/
 	
 class Ayuda {
-	const property nombre
-	const property position
+	var property position
 	
+	method mensaje()
+	method nombre()
 	method image()
-	method teEnvistio(argento)
+	method vender(){
+			if (self.estaAlLadoDePepe()){game.say(self, self.mensaje())}
+	}
+	method estaAlLadoDePepe(){
+		return self.estaALaDerechaDePepe()
+		or self.estaAbajoDePepe()
+		or self.estaALaIzquierdaDePepe()
+		or self.estaArribaDePepe()
+	}
+	method estaALaDerechaDePepe(){
+		return self.position().right(1) == pepe.position()
+	}
+	method estaALaIzquierdaDePepe(){
+		return self.position().left(1) == pepe.position()
+	}
+	method estaAbajoDePepe(){
+		return self.position().down(1) == pepe.position()
+	}
+	method estaArribaDePepe(){
+		return self.position().up(1) == pepe.position()
+	}
+	method esAtravesable(){
+		return false
+	}
 }
-class Moni inherits Ayuda{
+object moni inherits Ayuda{
 	var property comidaDisponible = []
+	
+	override method mensaje()  {return "Hola Pepe, tengo esto..."}
+	override method nombre(){ return "Moni"}
 	override method image(){return "moni.png"}
-	override method teEnvistio(argento){
-		game.say(self, "Hola Pepe, tengo")
-	}
+	
 }
-class MariaElena inherits Ayuda{
+object mariaElena inherits Ayuda{
 	var property armasDisponibles = []
+	
+	override method mensaje()  {return "Qué pasa bigote? ... sos careta?"}
+	override method nombre(){ return "Maria Elena"}
 	override method image(){return "maria_elena.png"}
-	override method teEnvistio(argento){
-		game.say(self, "Qué pasa bigote? ... sos careta?")
-	}
+	
 }

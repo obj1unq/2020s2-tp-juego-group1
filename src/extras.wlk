@@ -19,7 +19,11 @@ object proyectilMalo {
 	var property position = game.at(3,4)
 	method image(){ return "laser_naranja.png"}
 	method teEnvistio(argento){
-		argento.heridoPor(self)	
+		argento.heridoPor(self)
+		
+	}
+	method esAtravesable(){
+		return true
 	}
 }
 

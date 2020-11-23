@@ -7,6 +7,9 @@ class Moneda {
 	const property valor = 100
 	var property position = game.at(3,4)
 	
+	method esAtravesable(){
+		return true
+	}
 	method image() {
 		return "spinning-coin.gif"
 	}
@@ -24,9 +27,12 @@ class Billete {
 	var property position = game.at(1,5)
 	
 	method image() {
-		return "spinning-coin.gif"
+		return "billetes.png"
 	}
 	
+	method esAtravesable(){
+		return true
+	}
 	method teEnvistio(argento) {
 		argento.agarrarDinero(self)
 	} 
@@ -38,9 +44,12 @@ class Falso {
 	var property position = game.at(6,2)
 	
 	method image() {
-		return "spinning-coin.gif"
+		return "billetes.png"
 	}
 	
+	method esAtravesable(){
+		return true
+	}
 	method teEnvistio(argento) {
 		argento.agarrarDinero(self)
 	} 	

@@ -11,6 +11,7 @@ class Item {
 	
 }
 class Arma inherits Item{
+	var property cantidadDeBalas
 	override method usarEn(personaje){
 		personaje.equiparArma(self)
 	}
