@@ -4,19 +4,26 @@ import divisas.*
 import comidas.*
 import extras.*
 import items.*
+import mirta.*
+import corazones.*
+import bichos.*
 
-const arma1 = new Arma(nombre = "arma1", valor = 10, potencia = 1, cantidadDeBalas= 5)
-const arma2 = new Arma(nombre = "arma2", valor = 20, potencia = 2, cantidadDeBalas= 7)
-const arma3 = new Arma(nombre = "arma3", valor = 30, potencia = 3, cantidadDeBalas= 10)
-const cafecito = new Comida(nombre = "cafecito", valor = 10, potencia = 1)
-const pizza = new Comida(nombre = "pizza", valor = 15, potencia = 2)
-const milanesa = new Comida(nombre = "milanesa", valor = 20, potencia = 3)
-const sanguchito = new Comida(nombre = "sanguchito", valor = 20, potencia = 3)
-const obelisco = new Obstaculo(image= "obelisco.png", position= game.at(9, 12))
-const columna1 = new Columna(image= "objeto_transparente.png", position= game.at(0,3))
-const columna2 = new Columna(image= "objeto_transparente.png", position= game.at(1,3))
-const columna3 = new Columna(image= "objeto_transparente.png", position= game.at(2,3))
-		
+	const arma1 = new Arma(nombre = "arma1", valor = 10, potencia = 1, cantidadDeBalas= 5)
+	const arma2 = new Arma(nombre = "arma2", valor = 20, potencia = 2, cantidadDeBalas= 7)
+	const arma3 = new Arma(nombre = "arma3", valor = 30, potencia = 3, cantidadDeBalas= 10)
+	const cafecito = new Comida(nombre = "cafecito", valor = 10, potencia = 1)
+	const pizza = new Comida(nombre = "pizza", valor = 15, potencia = 2)
+	const milanesa = new Comida(nombre = "milanesa", valor = 20, potencia = 3)
+	const sanguchito = new Comida(nombre = "sanguchito", valor = 20, potencia = 3)
+	const obelisco = new Obstaculo(image= "obelisco.png", position= game.at(9, 12))
+	const columna1 = new Columna(image= "objeto_transparente.png", position= game.at(0,3))
+	const columna2 = new Columna(image= "objeto_transparente.png", position= game.at(1,3))
+	const columna3 = new Columna(image= "objeto_transparente.png", position= game.at(2,3))
+	const corazon1= new Corazon(position = game.at(2,13) , corazonPepe = 1)
+	const corazon2= new Corazon(position = game.at(3,13) , corazonPepe = 2)
+	const corazon3= new Corazon(position = game.at(4,13) , corazonPepe = 3)
+	const bicho1 = new Bichos(position = game.at(5,5) , zonaMovimiento = [1,10,1,10])
+	
 object nivel1 {
 	
 	method iniciar() {
@@ -37,9 +44,15 @@ object nivel1 {
 		game.onTick(3000,"crearDivisas",{generadorDeDivisas.crearDivisa()})
 		game.addVisual(moni)
 		game.addVisual(mariaElena)
-		game.addVisual(proyectilMalo)
 		game.addVisual(obelisco)
+		game.addVisual(corazon1)
+		game.addVisual(corazon2)
+		game.addVisual(corazon3)
 		config.configurarTeclas()
+		game.addVisual(mirta)
+		mirta.moverAleatorio()
+		mirta.disparar()
+		
 	}
 }
 

@@ -5,7 +5,7 @@ import pepe.*
 object mirta {
 	
 	var property position = game.at(5,5)
-	var property image = "mirtha.png"
+	var property image = "mirtha_der.png"
 	var property vida = 5
 	
 	method moverAleatorio(){
@@ -37,7 +37,7 @@ object mirta {
 		self.realizarDisparosAbajo()
 	}
 	method realizarDisparosIzquierda(){	
-		const disp = new Disparo(position = self.position().up(1))
+		const disp = new Disparo(position = self.position().right(1))
 		game.addVisual(disp)
 		disp.cambiarPosicionIzquierda()
 		disp.cambiarPosicionIzquierda()		
@@ -61,7 +61,7 @@ object mirta {
 	}
 	method realizarDisparosArriba(){
 		
-		const disp = new Disparo(position = self.position().right(1))
+		const disp = new Disparo(position = self.position().up(1))
 		game.addVisual(disp)
 		disp.cambiarPosicionArriba()
 		disp.cambiarPosicionArriba()		
@@ -69,6 +69,9 @@ object mirta {
 		}
 	method teEncontro(personaje){
 		personaje.reaccionar()
+	}
+	method esAtravesable(){
+		return false
 	}
 }
 
@@ -78,7 +81,7 @@ class Disparo {
 	method image(){
 		return "laser_naranja.png"
 	}
-	method teEncontro(personaje){
+	method teEnvistio(personaje){
 		personaje.reaccionar()
 	}
 	method cambiarPosicionIzquierda(){

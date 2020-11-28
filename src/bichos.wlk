@@ -2,17 +2,11 @@ import wollok.game.*
 
 class Bichos {
 	
-	var property position = null
-	var property zonaMovimiento = []
+	var property position
+	var property zonaMovimiento
 	
 	method image(){
-		return "corazon_vivo.png"
-	}
-	method configurarZonaMovimiento(x1,x2,y1,y2){
-		zonaMovimiento.add(x1)
-		zonaMovimiento.add(x2)
-		zonaMovimiento.add(y1)
-		zonaMovimiento.add(y2)
+		return "hijo_macri_der.png"
 	}
 	method moverAleatorio(){
 		

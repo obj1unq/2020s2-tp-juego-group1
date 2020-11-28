@@ -34,7 +34,7 @@ object abajo {
 }
 
 object pepe {
-	var property energia = 5
+	var property energia = 3
 	var property position = game.origin()
 	var property cuenta = cuentaCorriente
 	var property image = "pepe_adelante.png"
@@ -47,7 +47,7 @@ object pepe {
 		if (tieneArma){return "pepe_" + direccion.nombre() + "_"+armaEquipada.nombre()+".png"
 		} else {return "pepe_" + direccion.nombre() + ".png"}
 	}
-	
+
 	method equiparArma(arma){
 		armaEquipada = arma
 		tieneArma = true
@@ -122,7 +122,9 @@ object pepe {
 	method arribaDe(alguien){
 		return self.position().down(1) == alguien.position()
 	}
-
+	method reaccionar(){
+		if (energia > 0) energia -= 1
+	}
 //	method irALaDerecha() {
 //		image = "pepe_der.png"
 //		
