@@ -4,26 +4,20 @@ import divisas.*
 import nivel.*
 
 
-object cuentaCorriente {
+object billetera {
+	const property position = game.at(17, 13)
 	var property saldo = 0
+	var property image = "0.png"
 	
-	method depositar(monto) {
-		saldo += monto.valor()
+	method image(){
+		return saldo.toString()+".png"
 	}
-	
-	method extraer(monto) {
-		saldo-= monto
+	method guardar(monto) {
+		saldo = 0.max(saldo + monto.valor())
+	}
+	method sacar(monto) {
+		saldo = 0.max(saldo - monto)
 	}
 }
-object proyectilMalo {
-	var property position = game.at(3,4)
-	method image(){ return "laser_naranja.png"}
-	method teEnvistio(argento){
-		argento.heridoPor(self)
-		
-	}
-	method esAtravesable(){
-		return true
-	}
-}
+
 

@@ -3,56 +3,39 @@ import pepe.*
 import nivel.*
 import extras.*
 
-class Moneda {
-	const property valor = 100
-	var property position = game.at(3,4)
-	
+class Dinero {
 	method esAtravesable(){
 		return true
 	}
-	method image() {
-		return "spinning-coin.gif"
-	}
-	
+	method image()
 	method teEnvistio(argento) {
 		argento.agarrarDinero(self)
 	} 
-	
+}
+class Moneda inherits Dinero{
+	const property valor = 5
+	var property position = game.at(3,4)
+	override method image() {
+		return "Spinning-coin.gif"
+	}
 }
 
-
-
-class Billete {
-	const property valor = 300
+class Billete inherits Dinero{
+	const property valor = 10
 	var property position = game.at(1,5)
 	
-	method image() {
+	override method image() {
 		return "billetes.png"
-	}
-	
-	method esAtravesable(){
-		return true
-	}
-	method teEnvistio(argento) {
-		argento.agarrarDinero(self)
-	} 
-		
+	}	
 }
 
-class Falso {
-	const property valor = -50
+class Falso inherits Dinero{
+	const property valor = -5
 	var property position = game.at(6,2)
 	
-	method image() {
+	override method image() {
 		return "billetes.png"
-	}
-	
-	method esAtravesable(){
-		return true
-	}
-	method teEnvistio(argento) {
-		argento.agarrarDinero(self)
-	} 	
+	}	
 }
 
 object monedaFactory {

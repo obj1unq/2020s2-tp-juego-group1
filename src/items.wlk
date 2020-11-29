@@ -11,20 +11,53 @@ class Obstaculo {
 	method esAtravesable(){
 		return false
 	}
-	method dibujarObstaculo(){
-		game.addVisual(self)
+	
+}
+class ObstaculoMovimiento inherits Obstaculo{
+	var property posicionInicial
+	var property posicionFinal
+	
+	method avanzarSegunDireccion(){
+		if(posicionInicial.x()== 18){
+			position = position.left(1)
+		}else(position = position.right(1))
+	}
+	method avanzar(){
+		if(position == posicionFinal){
+			position = posicionInicial
+		}else{self.avanzarSegunDireccion()}
+	}
+	method moverse(){
+		game.onTick(100, "moverse", {self.avanzar()})
+	}
+	override method esAtravesable(){
+		return true
+	}
+	method teEnvistio(argento){
+		argento.heridoPor(self)
+	}
+}
+
+object columna{
+	
+	method crearColumna(xInicial, yInicial, tamanio,imagen){
+		(0..(tamanio)).forEach({iterador => game.addVisual(new Obstaculo(image=imagen,position=game.at(xInicial,yInicial+iterador)))})
 	}
 	
 }
 
-class Columna inherits Obstaculo{
-	var property elementosDeColumna = []
+class ImagenPantalla {
+	const property position = game.origin()
+	const property image 
 	
-	method dibujarColumna(){
-		elementosDeColumna.forEach({elemento => elemento.dibujarObstaculo()})
+}
+object gameover inherits ImagenPantalla{
+	override method image() {
+		return "imagen_gameover.png"
 	}
-	method crearColumna(xInicial, yInicial, tamanio,imagen){
-		(0..(tamanio)).forEach({iterador => elementosDeColumna.add(new Obstaculo(image=imagen,position=game.at(xInicial,yInicial+iterador)))})
+}
+object tituloInicio inherits ImagenPantalla {
+	override method image() {
+		return "pantalla_titulo.jpg"
 	}
-	
 }

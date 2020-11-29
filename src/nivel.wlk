@@ -8,37 +8,79 @@ import items.*
 const arma1 = new Arma(nombre = "arma1", valor = 10, potencia = 1, cantidadDeBalas= 5)
 const arma2 = new Arma(nombre = "arma2", valor = 20, potencia = 2, cantidadDeBalas= 7)
 const arma3 = new Arma(nombre = "arma3", valor = 30, potencia = 3, cantidadDeBalas= 10)
+
 const cafecito = new Comida(nombre = "cafecito", valor = 10, potencia = 1)
 const pizza = new Comida(nombre = "pizza", valor = 15, potencia = 2)
 const milanesa = new Comida(nombre = "milanesa", valor = 20, potencia = 3)
 const sanguchito = new Comida(nombre = "sanguchito", valor = 20, potencia = 3)
+
+const auto1 = new ObstaculoMovimiento(image= "auto_verde_der.png", position=game.at(0,1),posicionInicial= game.at(0,1), posicionFinal=game.at(18,1))
+const auto2 = new ObstaculoMovimiento(image= "auto_marron_izq.png", position=game.at(18,11),posicionInicial= game.at(18,11), posicionFinal=game.at(0,11))
+
 const obelisco = new Obstaculo(image= "obelisco.png", position= game.at(9, 12))
-const columna1 = new Columna(image= "objeto_transparente.png", position= game.at(0,3))
-const columna2 = new Columna(image= "objeto_transparente.png", position= game.at(1,3))
-const columna3 = new Columna(image= "objeto_transparente.png", position= game.at(2,3))
+const arbol1 = new Obstaculo(image="arbol1.png", position= game.at(6,12))
+const arbol2 = new Obstaculo(image="arbol2.png", position= game.at(9,2))
+const arbol3 = new Obstaculo(image="arbol2.png", position= game.at(5,2))
+const arbol4 = new Obstaculo(image="arbol2.png", position= game.at(12,2))
+const arbol5 = new Obstaculo(image="arbol1.png", position= game.at(12,12))
+const arbol6 = new Obstaculo(image="arbol2.png", position= game.at(5, 9))
+const arbol7 = new Obstaculo(image="arbol2.png", position= game.at(9, 9))
+const arbol8 = new Obstaculo(image="arbol2.png", position= game.at(12, 9))
+const arbusto = new Obstaculo(image="arbusto.png", position= game.at(9,6))
+const arbusto2 = new Obstaculo(image="arbusto.png", position= game.at(12,6))
+const arbusto3 = new Obstaculo(image="arbusto.png", position= game.at(5,6))
+
+
+object inicio{
+	method iniciarNivel(){
 		
+		game.title("Pepe vs Los Alienígenas")
+		game.height(14)
+		game.width(19)
+		game.boardGround("escenarioobelisco.jpg")
+		game.addVisual(tituloInicio)
+		keyboard.enter().onPressDo{nivel1.iniciar()}
+	}
+}
 object nivel1 {
 	
 	method iniciar() {
-		columna1.crearColumna(0,3, 6, "objeto_transparente.png")
-		columna1.dibujarColumna()
-		columna2.crearColumna(1,3, 6, "objeto_transparente.png")
-		columna2.dibujarColumna()
-		columna3.crearColumna(2,3, 6, "objeto_transparente.png")
-		columna3.dibujarColumna()
-		moni.position(game.at(0,1)) 
+		game.clear()
+		
+		columna.crearColumna(0,3, 6, "objeto_transparente.png")
+		columna.crearColumna(1,3, 6, "objeto_transparente.png")
+		columna.crearColumna(2,3, 6, "objeto_transparente.png")
+		columna.crearColumna(16,3, 6, "objeto_transparente.png")
+		columna.crearColumna(17,3, 6, "objeto_transparente.png")
+		columna.crearColumna(18,3, 6, "objeto_transparente.png")
+		moni.position(game.at(5,7)) 
 		moni.comidaDisponible([cafecito, pizza, milanesa, sanguchito])
 
-		mariaElena.position(game.at(15,1))
+		mariaElena.position(game.at(12,4))
 		mariaElena.armasDisponibles([arma1, arma2, arma3])
-		
+
+		game.addVisual(billetera)
+		game.addVisual(auto1)
+		auto1.moverse()
+		game.addVisual(auto2)
+		auto2.moverse()
 		game.addVisual(pepe)
 		config.configurarColisiones()
 		game.onTick(3000,"crearDivisas",{generadorDeDivisas.crearDivisa()})
 		game.addVisual(moni)
 		game.addVisual(mariaElena)
-		game.addVisual(proyectilMalo)
 		game.addVisual(obelisco)
+		game.addVisual(arbol1)
+		game.addVisual(arbol2)
+		game.addVisual(arbol3)
+		game.addVisual(arbol4)
+		game.addVisual(arbol5)
+		game.addVisual(arbol6)
+		game.addVisual(arbol7)
+		game.addVisual(arbol8)
+		game.addVisual(arbusto)
+		game.addVisual(arbusto2)
+		game.addVisual(arbusto3)
 		config.configurarTeclas()
 	}
 }
