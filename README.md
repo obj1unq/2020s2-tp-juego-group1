@@ -7,6 +7,7 @@ Nuestro personaje dispondrá de 3 corazones respresentando su nivel de energía,
 
 # Enemigos
 <img src="assets/mirtha_der.png" width="50px" /> <img src="assets/macri_der.png" width="50px" />
+-----
 Tendremos dos tipos de enemigos: los de nivel bajo y los de nivel alto. Los primeros, tendrán un patrón de movimiento simple, serán de menor tamaño y si tocan a Pepe le restan medio corazón. Los de nivel alto (o jefes) se moverán en todo el margen superior del nivel, con mayor velocidad y si tocan a Pepe le restan un corazón entero, además de disparar rayos laser. Nuestro personaje necesitará las armas para desintegrarlos, si no las tiene deberá esquivarlos y seguir buscando dinero.
 
 # Ayudas
