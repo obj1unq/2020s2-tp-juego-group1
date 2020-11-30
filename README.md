@@ -16,10 +16,10 @@ En cada escenario tendremos la ayuda de dos personajes fijos, es decir, no se mo
 
 # MaríaElena:
 <img src="assets/maria_elena.png" width="50px" />
-------
+
 Este personaje es el que nos ofrecerá las armas para destruir a los enemigos. El arsenal de armas podrá variar dependiendo del escenario. Cada una restará un punto de energía al enemigo y tendrá diferente valor.
 
 # MoniArgento: 
 <img src="assets/moni.png" width="50px" />
-------
+
 Este personaje nos ofrecerá comida para recuperar los corazones. Podremos elegir entre una porción de pizza, un sanguchito, una milanesa o un cafecito. Cada ítem tendrá diferente precio.
