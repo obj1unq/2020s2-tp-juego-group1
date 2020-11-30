@@ -11,9 +11,11 @@ Nuestro personaje dispondrá de 3 corazones respresentando su nivel de energía,
 Tendremos dos tipos de enemigos: los de nivel bajo y los de nivel alto. Los primeros, tendrán un patrón de movimiento simple, serán de menor tamaño y si tocan a Pepe le restan medio corazón. Los de nivel alto (o jefes) se moverán en todo el margen superior del nivel, con mayor velocidad y si tocan a Pepe le restan un corazón entero, además de disparar rayos laser. Nuestro personaje necesitará las armas para desintegrarlos, si no las tiene deberá esquivarlos y seguir buscando dinero.
 
 # Ayudas
-
+ <img src="assets/macri_der.png" width="50px" />
+-----
 En cada escenario tendremos la ayuda de dos personajes fijos, es decir, no se moverá sino que nosotros debemos acercarnos. A cada uno le podremos comprar diferentes ítems.
-
+<img src="assets/maria_elena.png" width="50px" />
 MaríaElena: Este personaje es el que nos ofrecerá las armas para destruir a los enemigos. El arsenal de armas podrá variar dependiendo del escenario. Cada una restará un punto de energía al enemigo y tendrá diferente valor.
-
+<img src="assets/moni.png" width="50px" />
+-----
 MoniArgento: Este personaje nos ofrecerá comida para recuperar los corazones. Podremos elegir entre una porción de pizza, un sanguchito, una milanesa o un cafecito. Cada ítem tendrá diferente precio.
