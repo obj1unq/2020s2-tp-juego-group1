@@ -1,7 +1,8 @@
 import wollok.game.*
-import pepe.*
+import personajes.*
 import nivel.*
 import extras.*
+import items.*
 
 class Dinero {
 	method esAtravesable(){
@@ -16,7 +17,7 @@ class Moneda inherits Dinero{
 	const property valor = 5
 	var property position = game.at(3,4)
 	override method image() {
-		return "Spinning-coin.gif"
+		return "Spinning-Coin.gif"
 	}
 }
 

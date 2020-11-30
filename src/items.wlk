@@ -2,8 +2,8 @@ import wollok.game.*
 import extras.*
 import nivel.*
 import divisas.*
-import comidas.*
-import pepe.*
+import personajes.*
+
 
 class Obstaculo {
 	const property image
@@ -34,7 +34,7 @@ class ObstaculoMovimiento inherits Obstaculo{
 		return true
 	}
 	method teEnvistio(argento){
-		argento.heridoPor(self)
+		argento.chocadoPor(self)
 	}
 }
 
@@ -59,5 +59,57 @@ object gameover inherits ImagenPantalla{
 object tituloInicio inherits ImagenPantalla {
 	override method image() {
 		return "pantalla_titulo.jpg"
+	}
+}
+object nivelsuperado inherits ImagenPantalla{
+	override method image() {
+		return "imagen_nivelsuperado.png"
+	}
+}
+class Item {
+	const property nombre
+	var property valor
+	var property potencia
+	
+	method usarEn(personaje)
+	
+}
+class Arma inherits Item{
+	var property position=null
+	var property cantidadDeBalas
+	const property nombreDeBala
+	override method usarEn(personaje){
+		personaje.equiparArma(self)
+
+	}
+	method dispararEn(_direccion){
+		cantidadDeBalas = 0.max(cantidadDeBalas-1)
+		const disparo = new Disparo(position=_direccion.mover(self.position()),nombre= nombreDeBala)
+		disparo.ejecutarEn(_direccion)
+	}
+
+}
+class Comida inherits Item{
+	override method usarEn(personaje){
+		personaje.consumir(self)
+	}
+}
+class Disparo {
+	var property position
+	const nombre
+	var property image = nombre
+	
+	method esAtravesable(){
+		return true
+	}
+	
+	method teEnvistio(personaje){
+		personaje.heridoPor(self)
+	}
+	method ejecutarEn(_direccion){
+		image = nombre+_direccion.nombre()+".png"
+		game.addVisual(self)
+		game.schedule(100, {position = _direccion.mover(position)})
+		game.schedule(200, {game.removeVisual(self)})
 	}
 }

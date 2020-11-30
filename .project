@@ -64,6 +64,21 @@
 			<location>D:/Jorge/unq/30.png</location>
 		</link>
 		<link>
+			<name>assets/35.png</name>
+			<type>1</type>
+			<location>D:/Jorge/unq/35.png</location>
+		</link>
+		<link>
+			<name>assets/40.png</name>
+			<type>1</type>
+			<location>D:/Jorge/unq/40.png</location>
+		</link>
+		<link>
+			<name>assets/45.png</name>
+			<type>1</type>
+			<location>D:/Jorge/unq/45.png</location>
+		</link>
+		<link>
 			<name>assets/5.png</name>
 			<type>1</type>
 			<location>D:/Jorge/unq/5.png</location>
@@ -74,9 +89,99 @@
 			<location>C:/Users/Pablo/Downloads/escenarioobelisco.jpg</location>
 		</link>
 		<link>
+			<name>assets/hijo_macri_adelante.png</name>
+			<type>1</type>
+			<location>D:/Jorge/unq/hijo_macri_adelante.png</location>
+		</link>
+		<link>
+			<name>assets/hijo_macri_atras.png</name>
+			<type>1</type>
+			<location>D:/Jorge/unq/hijo_macri_atras.png</location>
+		</link>
+		<link>
+			<name>assets/hijo_mirtha_adelante.png</name>
+			<type>1</type>
+			<location>D:/Jorge/unq/hijo_mirtha_adelante.png</location>
+		</link>
+		<link>
+			<name>assets/hijo_mirtha_atras.png</name>
+			<type>1</type>
+			<location>D:/Jorge/unq/hijo_mirtha_atras.png</location>
+		</link>
+		<link>
 			<name>assets/imagen_gameover.png</name>
 			<type>1</type>
 			<location>C:/Users/Pablo/Downloads/imagen_gameover.png</location>
+		</link>
+		<link>
+			<name>assets/imagen_nivelsuperado.png</name>
+			<type>1</type>
+			<location>C:/Users/Pablo/Downloads/imagen_nivelsuperado.png</location>
+		</link>
+		<link>
+			<name>assets/laser_azul_adelante.png</name>
+			<type>1</type>
+			<location>D:/Jorge/unq/laser_azul_adelante.png</location>
+		</link>
+		<link>
+			<name>assets/laser_azul_atras.png</name>
+			<type>1</type>
+			<location>D:/Jorge/unq/laser_azul_atras.png</location>
+		</link>
+		<link>
+			<name>assets/laser_azul_der.png</name>
+			<type>1</type>
+			<location>D:/Jorge/unq/laser_azul_der.png</location>
+		</link>
+		<link>
+			<name>assets/laser_azul_izq.png</name>
+			<type>1</type>
+			<location>D:/Jorge/unq/laser_azul_izq.png</location>
+		</link>
+		<link>
+			<name>assets/laser_naranja_adelante.png</name>
+			<type>1</type>
+			<location>D:/Jorge/unq/laser_naranja_adelante.png</location>
+		</link>
+		<link>
+			<name>assets/laser_naranja_atras.png</name>
+			<type>1</type>
+			<location>D:/Jorge/unq/laser_naranja_atras.png</location>
+		</link>
+		<link>
+			<name>assets/laser_naranja_der.png</name>
+			<type>1</type>
+			<location>D:/Jorge/unq/laser_naranja_der.png</location>
+		</link>
+		<link>
+			<name>assets/laser_naranja_izq.png</name>
+			<type>1</type>
+			<location>D:/Jorge/unq/laser_naranja_izq.png</location>
+		</link>
+		<link>
+			<name>assets/macri_adelante.png</name>
+			<type>1</type>
+			<location>D:/Jorge/unq/macri_adelante.png</location>
+		</link>
+		<link>
+			<name>assets/macri_atras.png</name>
+			<type>1</type>
+			<location>D:/Jorge/unq/macri_atras.png</location>
+		</link>
+		<link>
+			<name>assets/mirtha_adelante.png</name>
+			<type>1</type>
+			<location>D:/Jorge/unq/mirtha_adelante.png</location>
+		</link>
+		<link>
+			<name>assets/mirtha_atras.png</name>
+			<type>1</type>
+			<location>D:/Jorge/unq/mirtha_atras.png</location>
+		</link>
+		<link>
+			<name>assets/moni.png</name>
+			<type>1</type>
+			<location>D:/Jorge/unq/obj/2020s2-tp-juego-group1-master/2020s2-tp-juego-group1-master/assets/moni.png</location>
 		</link>
 		<link>
 			<name>assets/pantalla_titulo.jpg</name>
