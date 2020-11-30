@@ -96,7 +96,7 @@ class Comida inherits Item{
 }
 class Disparo {
 	var property position
-	const nombre
+	const property nombre
 	var property image = nombre
 	
 	method esAtravesable(){

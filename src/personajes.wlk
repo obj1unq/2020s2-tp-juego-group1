@@ -4,9 +4,7 @@ import nivel.*
 import divisas.*
 import items.*
 
-class Personaje {
-	
-}
+
 object pepe{
 	var property energia = 3
 	var property position =game.origin()
@@ -56,7 +54,7 @@ object pepe{
 		
 		self.irASiEstaEnElMapa(direccion.mover(position))
 		self.chequearSiInteractua()
-		//self.chequearSiElNivelEstaSuperado()
+		self.chequearSiElNivelEstaSuperado()
 	}
 		
 	method estaDentroDelMapa(nuevaPosicion) {
@@ -107,30 +105,35 @@ object pepe{
 	method perder(){
 		game.removeVisual(self)
 		game.addVisual(gameover)
+		keyboard.enter().onPressDo{game.stop()}	
 	}
-/*	method chequearSiElNivelEstaSuperado(){
+	method chequearSiElNivelEstaSuperado(){
 		if(enemigosDelNivel.enemigosVivos().isEmpty()){
 			self.ganar()
 		}
 	}
 	method ganar(){
 		game.removeVisual(self)
-		game.addVisual(nivelsuperado)	
-	}*/
+		game.addVisual(nivelsuperado)
+		keyboard.enter().onPressDo{game.stop()}	
+	}
+	method teEnvistio(personaje){}
 }
 class Enemigo{
 	var property posicionInicial
 	var property posicionFinal
 	var property image=null
-	var property energia=0
+	var property energia
 	var property position
 	var property direccion
 	
 	method disparar(){}
-	
-	method esAtravesable()
+	method agarrarDinero(divisa){}
+	method esAtravesable(){
+		return true
+	}
 	method moverse(){
-		game.onTick(400, "moverse", {self.avanzar()})
+		game.onTick(600, "moverse", {self.avanzar()})
 		
 	}
 	method avanzar(){
@@ -149,22 +152,34 @@ class Enemigo{
 		}else{direccion = arriba}
 	}
 	method heridoPor(algo){
+		self.validarDisparoEnemigoDe(algo)
+		self.concretarDanio()
+		
+	}
+	method concretarDanio(){
 		if(energia==1){
-			enemigosDelNivel.borrar(self)
+			self.morir()
 		}else{energia-=1}
+	}
+	method validarDisparoEnemigoDe(algo){
+		if(algo.nombre()=="laser_azul_"){
+			self.error("Eso no me hace nada")
+		}
+	}
+	method morir(){
+		enemigosDelNivel.borrar(self)
+		game.removeVisual(self)
+		game.removeTickEvent("disparar")
 	}
 	method chocadoPor(algo){}
 	
 }
 class Bicho inherits Enemigo {
 	var property nombre 
-	override method energia(){ return 3}
 	override method image(){
 		return nombre+"_"+direccion.nombre()+".png"
 	}
-	override method esAtravesable(){
-		return true
-	}
+
 	method teEnvistio(argento){
 		argento.chocadoPor(self)
 	}
@@ -172,15 +187,14 @@ class Bicho inherits Enemigo {
 
 class Jefe inherits Enemigo{
 	var property nombre
-	override method energia(){return 5}
 	override method image(){
 		return nombre+"_"+direccion.nombre()+".png"	
 	}
 	override method disparar(){
 		game.onTick(1000, "disparar", {self.realizarDisparos()})
 	}
-	override method esAtravesable(){
-		return false
+	method teEnvistio(argento){
+		argento.chocadoPor(self)
 	}
 
 	method realizarDisparos(){

@@ -31,12 +31,12 @@ const auto2 = new ObstaculoMovimiento(image= "auto_marron_izq.png", position=gam
 	const corazon1= new Corazon(position = game.at(1,13) , corazonPepe = 1)
 	const corazon2= new Corazon(position = game.at(2,13) , corazonPepe = 2)
 	const corazon3= new Corazon(position = game.at(3,13) , corazonPepe = 3)
-	const bicho1 = new Bicho(nombre = "hijo_mirtha", posicionInicial= game.at(3,2),posicionFinal=game.at(3,9), position = game.at(3,5),direccion= arriba)
-	const bicho2 = new Bicho(nombre = "hijo_mirtha", posicionInicial= game.at(7,2),posicionFinal=game.at(7,9), position = game.at(7,8),direccion= abajo)
-	const bicho3 = new Bicho(nombre = "hijo_macri", posicionInicial= game.at(10,2),posicionFinal=game.at(10,9), position = game.at(10,3),direccion= arriba)
-	const bicho4 = new Bicho(nombre = "hijo_macri", posicionInicial= game.at(15,2),posicionFinal=game.at(15,9), position = game.at(15,8),direccion= abajo)
-	const mirtha = new Jefe(nombre= "mirtha", position= game.at(1,10), posicionInicial=game.at(0,10), posicionFinal=game.at(8,10), direccion=derecha)
-	const macri = new Jefe(nombre= "macri", position= game.at(17,10), posicionInicial=game.at(18,10), posicionFinal=game.at(10,10), direccion=izquierda)
+	const bicho1 = new Bicho(nombre = "hijo_mirtha", posicionInicial= game.at(3,2),posicionFinal=game.at(3,9), position = game.at(3,5),direccion= arriba, energia=3)
+	const bicho2 = new Bicho(nombre = "hijo_mirtha", posicionInicial= game.at(7,2),posicionFinal=game.at(7,9), position = game.at(7,8),direccion= abajo, energia=3)
+	const bicho3 = new Bicho(nombre = "hijo_macri", posicionInicial= game.at(10,2),posicionFinal=game.at(10,9), position = game.at(10,3),direccion= arriba,energia=3)
+	const bicho4 = new Bicho(nombre = "hijo_macri", posicionInicial= game.at(15,2),posicionFinal=game.at(15,9), position = game.at(15,8),direccion= abajo, energia=3)
+	const mirtha = new Jefe(nombre= "mirtha", position= game.at(1,10), posicionInicial=game.at(0,10), posicionFinal=game.at(8,10), direccion=derecha, energia=5)
+	const macri = new Jefe(nombre= "macri", position= game.at(17,10), posicionInicial=game.at(18,10), posicionFinal=game.at(10,10), direccion=izquierda, energia=5)
 	
 
 
@@ -79,7 +79,6 @@ object nivel1 {
 		auto2.moverse()
 		
 		game.addVisual(pepe)
-		config.configurarColisiones()
 		game.onTick(3000,"crearDivisas",{generadorDeDivisas.crearDivisa()})
 		game.addVisual(moni)
 		game.addVisual(mariaElena)
@@ -96,24 +95,31 @@ object nivel1 {
 		game.addVisual(arbusto2)
 		game.addVisual(arbusto3)
 		
-		/*game.addVisual(bicho1)
+		game.addVisual(bicho1)
 		bicho1.moverse()
 		game.addVisual(bicho2)
 		bicho2.moverse()
 		game.addVisual(bicho3)
 		bicho3.moverse()
 		game.addVisual(bicho4)
-		bicho4.moverse()*/
+		bicho4.moverse()
 		
 		game.addVisual(mirtha)
 		mirtha.moverse()
 		mirtha.disparar()
-//		game.addVisual(macri)
-//		macri.moverse()
-//		macri.disparar()
+		game.addVisual(macri)
+		macri.moverse()
+		macri.disparar()
 
-		enemigosDelNivel.enemigosVivos(#{mirtha})
+		enemigosDelNivel.enemigosVivos(#{mirtha,bicho1,bicho2,bicho3,bicho4,macri})
 		config.configurarTeclas()
+		config.configurarColisiones(pepe)
+		config.configurarColisiones(mirtha)
+		config.configurarColisiones(bicho1)
+		config.configurarColisiones(bicho2)
+		config.configurarColisiones(bicho3)
+		config.configurarColisiones(bicho4)
+		config.configurarColisiones(macri)
 	}
 }
 
@@ -138,8 +144,7 @@ object config {
 								
 	}
 	
-	method configurarColisiones() {
-		game.onCollideDo(pepe, {algo => algo.teEnvistio(pepe)})
-//		game.onCollideDo(mirtha, {algo => algo.teEnvistio(mirtha)})
+	method configurarColisiones(personaje) {
+		game.onCollideDo(personaje, {algo => algo.teEnvistio(personaje)})
 	}
 }
