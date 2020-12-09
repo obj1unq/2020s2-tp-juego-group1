@@ -84,7 +84,7 @@ class Arma inherits Item{
 	}
 	method dispararEn(_direccion){
 		cantidadDeBalas = 0.max(cantidadDeBalas-1)
-		const disparo = new Disparo(position=_direccion.mover(self.position()),nombre= nombreDeBala)
+		const disparo = new DisparoPepe(position=_direccion.mover(self.position()),nombre= nombreDeBala)
 		disparo.ejecutarEn(_direccion)
 	}
 
@@ -106,10 +106,25 @@ class Disparo {
 	method teEnvistio(personaje){
 		personaje.heridoPor(self)
 	}
-	method ejecutarEn(_direccion){
+	method ejecutarEn(_direccion)
+}
+class DisparoPepe inherits Disparo{
+	const property haceDanioAPepe = false
+	const property haceDanioAEnemigo = true
+	override method ejecutarEn(_direccion){
 		image = nombre+_direccion.nombre()+".png"
 		game.addVisual(self)
 		game.schedule(100, {position = _direccion.mover(position)})
 		game.schedule(200, {game.removeVisual(self)})
+	}
+}
+class DisparoEnemigo inherits Disparo{
+	const property haceDanioAPepe = true
+	const property haceDanioAEnemigo = false
+	override method ejecutarEn(_direccion){
+		image = nombre+_direccion.nombre()+".png"
+		game.addVisual(self)
+		game.schedule(500, {position = _direccion.mover(position)})
+		game.schedule(600, {game.removeVisual(self)})
 	}
 }

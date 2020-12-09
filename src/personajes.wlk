@@ -16,11 +16,7 @@ object pepe{
 	const property personajesParaInteractuar = #{moni,mariaElena}
 	
 	method chequearSiInteractua(){
-		if(self.estaAlLadoDe(moni)){
-			game.say(moni, moni.mensaje())
-		}else if(self.estaAlLadoDe(mariaElena)){
-			game.say(mariaElena, mariaElena.mensaje())
-		}
+		personajesParaInteractuar.forEach({ayuda=>if(self.estaAlLadoDe(ayuda)){ayuda.interactuar()}})
 	}
 	method image() {
 		if (tieneArma){return "pepe_" + direccion.nombre() + "_"+armaEquipada.nombre()+".png"
@@ -32,12 +28,18 @@ object pepe{
 		tieneArma = true
 	}
 	method disparar(){
+		self.verificarQueTieneArma()
 		armaEquipada.position(self.position())
 		if(armaEquipada.cantidadDeBalas()==1){
 			armaEquipada.dispararEn(direccion)
 			tieneArma=false
 			armaEquipada=null
 		}else{armaEquipada.dispararEn(direccion)}
+	}
+	method verificarQueTieneArma(){
+		if(!self.tieneArma()){
+			self.error("Necesito comprar un arma")
+		}
 	}
 	method consumir(comida){
 		energia += comida.potencia()
@@ -67,10 +69,21 @@ object pepe{
 			self.perder()}
 			else{ energia -= 1}
 	}
+	
 	method heridoPor(algo){
+		self.validarDanio(algo)
+		self.concretarDanio()
+		
+	}
+	method concretarDanio(){
 		if(energia == 1){
 			self.perder()}
 			else{ energia -= 1}
+	}
+	method validarDanio(algo){
+		if(!algo.haceDanioAPepe()){
+			self.error("Eso no me hace nada")
+		}
 	}
 	method agarrarDinero(divisa) {
 		cuenta.guardar(divisa)
@@ -92,7 +105,7 @@ object pepe{
 	}
 	method validarDineroEnCuenta(algo) {
 		if  (algo.valor() > cuenta.saldo()) {
-			self.error("No me alcanza la guitaaa!!")
+			self.error("¡No me alcanza la guita!")
 		}
 	}
 
@@ -138,21 +151,13 @@ class Enemigo{
 	}
 	method avanzar(){
 		if(position == posicionFinal or position == posicionInicial){
-			self.cambiarDireccion()
+			direccion = direccion.opuesto()
 			position = direccion.mover(position)
 		}else{ position= direccion.mover(position)}
 	}
-	method cambiarDireccion(){
-		if(direccion.nombre() == "izq"){
-			direccion = derecha
-		}else if(direccion.nombre() == "atras"){
-			direccion = abajo
-		}else if(direccion.nombre()== "der"){
-			direccion = izquierda
-		}else{direccion = arriba}
-	}
+	
 	method heridoPor(algo){
-		self.validarDisparoEnemigoDe(algo)
+		self.validarDanio(algo)
 		self.concretarDanio()
 		
 	}
@@ -161,8 +166,8 @@ class Enemigo{
 			self.morir()
 		}else{energia-=1}
 	}
-	method validarDisparoEnemigoDe(algo){
-		if(algo.nombre()=="laser_azul_"){
+	method validarDanio(algo){
+		if(!algo.haceDanioAEnemigo()){
 			self.error("Eso no me hace nada")
 		}
 	}
@@ -187,42 +192,22 @@ class Bicho inherits Enemigo {
 
 class Jefe inherits Enemigo{
 	var property nombre
+	const property direccionDisparo= abajo
 	override method image(){
 		return nombre+"_"+direccion.nombre()+".png"	
 	}
 	override method disparar(){
-		game.onTick(1000, "disparar", {self.realizarDisparos()})
+		game.onTick(5000, "disparar", {self.realizarDisparos()})
 	}
 	method teEnvistio(argento){
 		argento.chocadoPor(self)
 	}
 
 	method realizarDisparos(){
-//		self.realizarDisparosIzquierda()
-//		self.realizarDisparosDerecha()
-//		self.realizarDisparosArriba()
-		self.realizarDisparosAbajo()
+		const _disparo = new DisparoEnemigo(position = direccionDisparo.mover(self.position()), nombre = "laser_azul_")
+		_disparo.ejecutarEn(direccionDisparo)
 	}
-	method realizarDisparosIzquierda(){	
-		const disp = new Disparo(position = self.position().right(1), nombre = "laser_azul_")
-		disp.ejecutarEn(izquierda)	
-		
-	}
-	method realizarDisparosDerecha(){
-		const disp = new Disparo(position = self.position().left(1), nombre = "laser_azul_")
-		disp.ejecutarEn(derecha)	
-		
-		}
-	method realizarDisparosAbajo(){
-		const disp = new Disparo(position = self.position().down(1), nombre = "laser_azul_")
-		disp.ejecutarEn(abajo)	
-		
-	}
-	method realizarDisparosArriba(){
-		const disp = new Disparo(position = self.position().up(1), nombre = "laser_azul_")
-		disp.ejecutarEn(arriba)		
-		
-		}
+	
 
 }
 
@@ -234,6 +219,9 @@ class Ayuda {
 	method image()
 	method esAtravesable(){
 		return false
+	}
+	method interactuar(){
+		game.say(self, self.mensaje())
 	}
 	
 }

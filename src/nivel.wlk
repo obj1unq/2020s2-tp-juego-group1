@@ -4,17 +4,17 @@ import personajes.*
 import extras.*
 import items.*
 
-const arma1 = new Arma(nombre = "arma1", nombreDeBala= "laser_verde_",valor = 10, potencia = 1, cantidadDeBalas= 5)
-const arma2 = new Arma(nombre = "arma2", nombreDeBala= "laser_amarillo_", valor = 20, potencia = 2, cantidadDeBalas= 7)
-const arma3 = new Arma(nombre = "arma3", nombreDeBala= "laser_naranja_",valor = 30, potencia = 3, cantidadDeBalas= 10)
+	const arma1 = new Arma(nombre = "arma1", nombreDeBala= "laser_verde_",valor = 10, potencia = 1, cantidadDeBalas= 5)
+	const arma2 = new Arma(nombre = "arma2", nombreDeBala= "laser_amarillo_", valor = 20, potencia = 2, cantidadDeBalas= 7)
+	const arma3 = new Arma(nombre = "arma3", nombreDeBala= "laser_naranja_",valor = 30, potencia = 3, cantidadDeBalas= 10)
 
-const cafecito = new Comida(nombre = "cafecito", valor = 10, potencia = 1)
-const pizza = new Comida(nombre = "pizza", valor = 15, potencia = 2)
-const milanesa = new Comida(nombre = "milanesa", valor = 20, potencia = 3)
-const sanguchito = new Comida(nombre = "sanguchito", valor = 20, potencia = 3)
+	const cafecito = new Comida(nombre = "cafecito", valor = 10, potencia = 1)
+	const pizza = new Comida(nombre = "pizza", valor = 15, potencia = 2)
+	const milanesa = new Comida(nombre = "milanesa", valor = 20, potencia = 3)
+	const sanguchito = new Comida(nombre = "sanguchito", valor = 20, potencia = 3)
 
-const auto1 = new ObstaculoMovimiento(image= "auto_verde_der.png", position=game.at(0,1),posicionInicial= game.at(0,1), posicionFinal=game.at(18,1))
-const auto2 = new ObstaculoMovimiento(image= "auto_marron_izq.png", position=game.at(18,11),posicionInicial= game.at(18,11), posicionFinal=game.at(0,11))
+	const auto1 = new ObstaculoMovimiento(image= "auto_verde_der.png", position=game.at(0,1),posicionInicial= game.at(0,1), posicionFinal=game.at(18,1))
+	const auto2 = new ObstaculoMovimiento(image= "auto_marron_izq.png", position=game.at(18,11),posicionInicial= game.at(18,11), posicionFinal=game.at(0,11))
 
 	const obelisco = new Obstaculo(image= "obelisco.png", position= game.at(9, 12))
 	const arbol1 = new Obstaculo(image="arbol1.png", position= game.at(6,12))
@@ -97,29 +97,29 @@ object nivel1 {
 		
 		game.addVisual(bicho1)
 		bicho1.moverse()
-		game.addVisual(bicho2)
-		bicho2.moverse()
-		game.addVisual(bicho3)
-		bicho3.moverse()
-		game.addVisual(bicho4)
-		bicho4.moverse()
+		//game.addVisual(bicho2)
+		//bicho2.moverse()
+		//game.addVisual(bicho3)
+		//bicho3.moverse()
+		//game.addVisual(bicho4)
+		//bicho4.moverse()
 		
 		game.addVisual(mirtha)
 		mirtha.moverse()
 		mirtha.disparar()
-		game.addVisual(macri)
-		macri.moverse()
-		macri.disparar()
+	  //game.addVisual(macri)
+		//macri.moverse()
+		//macri.disparar()
 
-		enemigosDelNivel.enemigosVivos(#{mirtha,bicho1,bicho2,bicho3,bicho4,macri})
+		enemigosDelNivel.enemigosVivos(#{mirtha,bicho1})
 		config.configurarTeclas()
 		config.configurarColisiones(pepe)
 		config.configurarColisiones(mirtha)
 		config.configurarColisiones(bicho1)
-		config.configurarColisiones(bicho2)
+		/*config.configurarColisiones(bicho2)
 		config.configurarColisiones(bicho3)
 		config.configurarColisiones(bicho4)
-		config.configurarColisiones(macri)
+		config.configurarColisiones(macri)*/
 	}
 }
 

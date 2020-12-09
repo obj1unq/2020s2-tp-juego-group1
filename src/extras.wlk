@@ -9,12 +9,18 @@ object izquierda {
 	method mover(posicion) {
 		return posicion.left(1)
 	}
+	method opuesto(){
+		return derecha
+	}
 }
 
 object derecha {
 	method nombre() {return "der"}
 	method mover(posicion) {
 		return posicion.right(1)
+	}
+	method opuesto(){
+		return izquierda
 	}
 }
 
@@ -23,12 +29,18 @@ object arriba {
 	method mover(posicion) {
 		return posicion.up(1)
 	}
+	method opuesto(){
+		return abajo
+	}
 }
 
 object abajo {
 	method nombre() {return "adelante"}
 	method mover(posicion) {
 		return posicion.down(1)
+	}
+	method opuesto(){
+		return arriba
 	}
 }
 
